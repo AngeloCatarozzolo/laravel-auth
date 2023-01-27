@@ -28,7 +28,7 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
         return view('admin.dashboard');
     })->name('dashboard');
 
-    Route::resource('project', Projectcontroller::class);
+    Route::resource('projects', Projectcontroller::class);
 });
 
 // Tutte le rotte di autenticazione

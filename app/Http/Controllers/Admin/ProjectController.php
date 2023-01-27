@@ -7,6 +7,7 @@ use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Str;
+use Storage;
 
 class ProjectController extends Controller
 {
@@ -63,7 +64,7 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        return view('admin.projects.show', compact('projects'));
+        return view('admin.projects.show', compact('project'));
     }
 
     /**
