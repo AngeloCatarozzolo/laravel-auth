@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Admin\Projectcontroller;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\PostControllers;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -26,7 +28,7 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
         return view('admin.dashboard');
     })->name('dashboard');
 
-    Route::resource('posts', Postcontroller::class);
+    Route::resource('project', Projectcontroller::class);
 });
 
 // Tutte le rotte di autenticazione
