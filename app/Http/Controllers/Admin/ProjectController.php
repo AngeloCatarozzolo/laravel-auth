@@ -77,7 +77,7 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        //
+        return view('admin.projects.edit', compact('project'));
     }
 
     /**
@@ -89,7 +89,17 @@ class ProjectController extends Controller
      */
     public function update(UpdateProjectRequest $request, Project $project)
     {
-        //
+        $data = $request->validated();
+
+        $project->slug = Str::slug($data['name']);
+
+        $project->update($data);
+
+        if(isset($data['cover_image'])) {
+            $data['cover_image'] = Storage::disk(('public')->put('uploads', $data['cover_image']));
+        }
+
+        return redirect()->route('admin.projects.index');
     }
 
     /**
