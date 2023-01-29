@@ -93,17 +93,15 @@ class ProjectController extends Controller
 
         $project->slug = Str::slug($data['name']);
 
-        $project->update($data);
-
         if(isset($data['cover_image'])) {
-            if(project->cover_image) {
+            if($project->cover_image) {
                 //elimina l'immagie precedente nella cartella se modificata o eliminata 
                 Storage::disk('public')->delete($project->cover_image);
             }
-            //elimina l'immagie precedente nella cartella se modificata o eliminata 
-            Storage::disk('public')->delete($project->cover_image);
-            $data['cover_image'] = Storage::disk(('public')->put('uploads', $data['cover_image']));
+            $data['cover_image'] = Storage::disk('public')->put('uploads', $data['cover_image']);
         }
+
+        $project->update($data);
 
         return redirect()->route('admin.projects.index');
     }
