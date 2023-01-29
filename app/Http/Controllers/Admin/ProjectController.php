@@ -96,6 +96,12 @@ class ProjectController extends Controller
         $project->update($data);
 
         if(isset($data['cover_image'])) {
+            if(project->cover_image) {
+                //elimina l'immagie precedente nella cartella se modificata o eliminata 
+                Storage::disk('public')->delete($project->cover_image);
+            }
+            //elimina l'immagie precedente nella cartella se modificata o eliminata 
+            Storage::disk('public')->delete($project->cover_image);
             $data['cover_image'] = Storage::disk(('public')->put('uploads', $data['cover_image']));
         }
 
@@ -110,6 +116,12 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
-        //
+        if($project->cover_image) {
+            Storage::disk('public')->delete($project->cover_image);
+        }
+
+        $project->delete();
+
+        return redirect()->route('admin.projects.index');
     }
 }
